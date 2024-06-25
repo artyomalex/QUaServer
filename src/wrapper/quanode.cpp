@@ -681,13 +681,13 @@ void QUaNode::addReference(const QUaReferenceType& ref, QUaNode* nodeTarget, con
 	}
 	Q_ASSERT(m_qUaServer->m_hashRefTypes.contains(ref));
 	// reject hierarchical references
-	Q_ASSERT_X(!m_qUaServer->m_hashHierRefTypes.contains(ref), "QUaNode::addReference", "Cannot add hierarchical references using this method.");
+    /*Q_ASSERT_X(!m_qUaServer->m_hashHierRefTypes.contains(ref), "QUaNode::addReference", "Cannot add hierarchical references using this method.");
 	if (m_qUaServer->m_hashHierRefTypes.contains(ref))
 	{
 		return;
-	}
+    } */
 	// check valid node target
-	Q_ASSERT_X(nodeTarget, "QUaNode::addReference", "Invalid target node.");
+    Q_ASSERT_X(nodeTarget, "QUaNode::addReference", "Invalid target node.");
 	if (!nodeTarget)
 	{
 		return;

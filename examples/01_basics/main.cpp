@@ -30,10 +30,10 @@ int main(int argc, char *argv[])
 	varBaseData->setWriteAccess(true);
 	varBaseData->setValue(1);
 	Q_ASSERT(varBaseData->value<int>() == 1);
-	QObject::connect(varBaseData, &QUaBaseDataVariable::valueChanged, [](const QVariant &value) {
+    QObject::connect(varBaseData, &QUaBaseDataVariable::valueChanged, [](const QVariant &value) {
 		qDebug() << "New value :" << value;
 	});
-
+    emit varBaseData->valueChanged(QVariant(9.9999999), false);
 	QUaProperty * varProp = objsFolder->addProperty("my_property", "ns=1;s=my_prop");
 	varProp->setValue("hola");
 	Q_ASSERT(varProp->value<QString>() == QString("hola"));

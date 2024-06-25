@@ -192,7 +192,7 @@ namespace QUaTypesConverter {
 			return UA_NODEID_NUMERIC(0, UA_NS0ID_MODELCHANGESTRUCTUREDATATYPE);
 		}
 #endif
-		Q_ASSERT_X(false, "uaTypeNodeIdFromCpp", "Unsupported type");
+        Q_ASSERT_X(false, "uaTypeNodeIdFromCpp", "Unsupported type");
 		return UA_NodeId();
 	}
 

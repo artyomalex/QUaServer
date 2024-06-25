@@ -291,7 +291,7 @@ public slots:
 	
 
 private:
-	UA_Server             * m_server;
+//	UA_Server             * m_server;
 	quint16                 m_port;
 	quint16                 m_maxSecureChannels;
 	quint16                 m_maxSessions;
@@ -303,7 +303,8 @@ private:
 	QUaFolderObject       * m_pobjectsFolder;
 	char                    m_logBuffer[QUA_MAX_LOG_MESSAGE_SIZE];
     bool                    m_beingDestroyed;
-
+public:
+    UA_Server             * m_server;
 #ifdef UA_ENABLE_ENCRYPTION
 	QByteArray m_bytePrivateKey;
 	QByteArray m_bytePrivateKeyInternal; // NOTE : needs to exists as long as server instance

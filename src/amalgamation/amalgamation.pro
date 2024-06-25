@@ -1,6 +1,9 @@
 TEMPLATE = lib
 CONFIG  += debug_and_release build_all
 CONFIG  += staticlib
+#CONFIG  +=ua_events
+#CONFIG  +=ua_historizing
+#CONFIG  +=ua_alarms_conditions
 CONFIG  -= app_bundle
 CONFIG  -= qt
 
