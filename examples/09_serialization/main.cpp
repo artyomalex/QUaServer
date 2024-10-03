@@ -4,10 +4,11 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+//#include "C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\winver.h"
 #include <QCoreApplication>
 #include <QFileInfo>
 #include <QDebug>
-
+#include <QRegularExpression>
 #include <QUaServer>
 
 #include "temperaturesensor.h"
@@ -92,7 +93,7 @@ static cling::Interpreter *intrp;
 
 auto usePointerLiteral_str(cling::Interpreter& interp, std::ostringstream *sstr) {
     //int res = 17; // The value that will be modified
-    QRegExp test(".");
+    QRegularExpression test(".");
     //interp.unload(2);
     // Update the value of res by passing it to the interpreter.
     // on Windows, to prefix the hexadecimal value of a pointer with '0x',
@@ -134,7 +135,7 @@ auto testNumbers(QList<QUaBaseDataVariable*> a)
     {
         qDebug() << a.at(i)->value();
     }
-    QStringList ls = a.at(0)->value().toString().split(QRegExp("`"));
+    QStringList ls = a.at(0)->value().toString().split(QRegularExpression("`"));
     std::ostringstream sstr;
     for(int i=0;i<ls.length()/2;i++)
     {
@@ -147,11 +148,13 @@ auto testNumbers(QList<QUaBaseDataVariable*> a)
         //auto syy = sxx->value();
         auto syy = a.at(sbb)->value();
         values.append(syy);
-        //}
+       }
+    for (int i = 0; i < values.length(); i++)
+    {
         //  values.append(QVariant((objsFolder-> browseChild<QUaBaseDataVariable>(ls[2*i+1]))->value()));
         types.append(QString(values[i].typeName())); // + QString("& ls[") + QString(i) + QString("]"));
-        sstr << types[i].toUtf8().constData() << "& types_"<< std::dec << i << " = *(" << types[i].toUtf8().constData() << "*)" << std::hex << std::showbase << (values[i].data()) << ';';
-        std::cout << types[i].toUtf8().constData() << "& types_"<< std::dec << i << " = *(" << types[i].toUtf8().constData() << "*)" << std::hex << std::showbase << (values[i].data()) << ';' << std::endl;
+        sstr << types[i].toUtf8().constData() << "& types_"<< std::dec << i << " = *(" << types[i].toUtf8().constData() << "*)0x" << std::hex << std::showbase << (values[i].data()) << ';';
+        std::cout << types[i].toUtf8().constData() << "& types_"<< std::dec << i << " = *(" << types[i].toUtf8().constData() << "*)0x" << std::hex << std::showbase << (values[i].data()) << ';' << std::endl;
     }
     for(int i=0;i<ls.length();i++)
     {
@@ -169,7 +172,8 @@ auto testNumbers(QList<QUaBaseDataVariable*> a)
     std::cout<<std::endl;
     auto sstr_prog = sstr.str();
     usePointerLiteral_str(*intrp,&sstr);
-    a.last()->setValue(values.first());
+    auto a_val = values.last();
+    (a.last())->setValue(values.first());
     return 0; //x + y;
 }
 
@@ -284,7 +288,7 @@ int main(int argc, char *argv[])
         QUaBaseDataVariable * objSensor1 = objSupl1->addBaseDataVariable("TempSensor1");
         QUaBaseDataVariable * objSensor2 = objSupl1->addBaseDataVariable("TempSensor2");
         objSensor1->setValue(1.0);
-        objSensor1->setAccessLevel(UA_ACCESSLEVELEXTYPE_CURRENTREAD|UA_ACCESSLEVELEXTYPE_CURRENTWRITE);
+        objSensor1->setAccessLevel(1|2);
         objSensor2->setValue(2.0);
         QUaBaseDataVariable * objSensor4 = objSensor1->addBaseDataVariable("TempSensor4");
 

@@ -632,7 +632,7 @@ bool QUaSqliteSerializer::insertNewInstance(
 	query.bindValue(0, nodeKey);
 	for (int i = 1; i < attrNames.count(); i++)
 	{
-		auto& value = attrs[attrNames.at(i)];
+        const auto& value = attrs[attrNames.at(i)];
 		// NOTE : need to fix QMetaType::UChar serialization
 		auto type = static_cast<QMetaType::Type>(value.type());
 		query.bindValue(i, type == QMetaType::UChar ? value.toUInt() : value);
