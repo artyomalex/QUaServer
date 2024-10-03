@@ -203,7 +203,6 @@ QMAKE_LFLAGS  += /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/lib
 QMAKE_LFLAGS  += /opt/homebrew/lib/libzstd.dylib
 QMAKE_LFLAGS  += /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/lib/libcurses.tbd
 
-
 SOURCES += \
 main.cpp \
 quasqliteserializer.cpp \
