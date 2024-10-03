@@ -147,7 +147,9 @@ auto testNumbers(QList<QUaBaseDataVariable*> a)
         //auto syy = sxx->value();
         auto syy = a.at(sbb)->value();
         values.append(syy);
-        //}
+    }
+    for(int i=0;i<values.length();i++)
+    {
         //  values.append(QVariant((objsFolder-> browseChild<QUaBaseDataVariable>(ls[2*i+1]))->value()));
         types.append(QString(values[i].typeName())); // + QString("& ls[") + QString(i) + QString("]"));
         sstr << types[i].toUtf8().constData() << "& types_"<< std::dec << i << " = *(" << types[i].toUtf8().constData() << "*)" << std::hex << std::showbase << (values[i].data()) << ';';
